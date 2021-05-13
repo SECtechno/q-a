@@ -15,5 +15,21 @@ module.exports = {
       callback(err);
     });
   },
-};
 
+  markAnswerHelpful: (answerId, callback) => {
+    const q = 'UPDATE answers SET helpful = helpful + 1 WHERE id = ?';
+
+    db.query(q, answerId, (err) => {
+      callback(err);
+    });
+  },
+
+  markReported: (answerId, callback) => {
+    const q = 'UPDATE answers SET reported = 1 WHERE id = ?';
+
+    db.query(q, answerId, (err) => {
+      callback(err);
+    });
+  },
+
+};

@@ -30,4 +30,28 @@ module.exports = {
       }
     });
   },
+
+  updateHelpful: (req, res) => {
+    const questionId = 54;
+    models.questions.markQuestionHelpful(questionId, (err) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(201).send();
+      }
+    });
+  },
+
+  updateReported: (req, res) => {
+    const questionId = 54;
+    models.questions.markReported(questionId, (err) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(201).send();
+      }
+    });
+  },
+
+
 };

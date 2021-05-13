@@ -1,6 +1,8 @@
 const models = require('../models');
 const questionId = require('../app.js');
 
+const answerId = 369406;
+
 module.exports = {
   get: (req, res) => {
     models.answers.getAnswers(questionId, (err, results) => {
@@ -13,7 +15,6 @@ module.exports = {
 
   post: (req, res) => {
     const request = req.body;
-    console.log(request);
     const params = [
       request.question_id,
       request.body,
@@ -22,6 +23,26 @@ module.exports = {
       request.answerer_email,
     ];
     models.answers.addAnswer(params, (err) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(201).send();
+      }
+    });
+  },
+
+  updateHelpful: (req, res) => {
+    models.answers.markAnswerHelpful(answerId, (err) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(201).send();
+      }
+    });
+  },
+
+  updateReported: (req, res) => {
+    models.answers.markReported(answerId, (err) => {
       if (err) {
         res.status(400).send(err);
       } else {
