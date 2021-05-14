@@ -1,11 +1,9 @@
 const models = require('../models');
-const questionId = require('../app.js');
-
-const answerId = 369406;
+const ids = require('../ids.js');
 
 module.exports = {
   get: (req, res) => {
-    models.answers.getAnswers(questionId, (err, results) => {
+    models.answers.getAnswers(ids.generateRandomId(), (err, results) => {
       if (err) {
         res.status(400).send(err);
       }
@@ -32,7 +30,7 @@ module.exports = {
   },
 
   updateHelpful: (req, res) => {
-    models.answers.markAnswerHelpful(answerId, (err) => {
+    models.answers.markAnswerHelpful(ids.generateRandomId(), (err) => {
       if (err) {
         res.status(400).send(err);
       } else {
@@ -42,7 +40,7 @@ module.exports = {
   },
 
   updateReported: (req, res) => {
-    models.answers.markReported(answerId, (err) => {
+    models.answers.markReported(ids.generateRandomId(), (err) => {
       if (err) {
         res.status(400).send(err);
       } else {

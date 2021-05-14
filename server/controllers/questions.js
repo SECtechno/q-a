@@ -1,9 +1,9 @@
 const models = require('../models');
+const ids = require('../ids.js');
 
 module.exports = {
   get: (req, res) => {
-    const productId = 2;
-    models.questions.getQuestions(productId, (err, results) => {
+    models.questions.getQuestions(ids.generateRandomId(), (err, results) => {
       if (err) {
         res.status(400).send(err);
       }
@@ -14,7 +14,6 @@ module.exports = {
   post: (req, res) => {
     const request = req.body;
 
-    console.log(req);
     const params = [
       request.product_id,
       request.body,
@@ -32,8 +31,7 @@ module.exports = {
   },
 
   updateHelpful: (req, res) => {
-    const questionId = 54;
-    models.questions.markQuestionHelpful(questionId, (err) => {
+    models.questions.markQuestionHelpful(ids.generateRandomId(), (err) => {
       if (err) {
         res.status(400).send(err);
       } else {
@@ -43,8 +41,7 @@ module.exports = {
   },
 
   updateReported: (req, res) => {
-    const questionId = 54;
-    models.questions.markReported(questionId, (err) => {
+    models.questions.markReported(ids.generateRandomId(), (err) => {
       if (err) {
         res.status(400).send(err);
       } else {
@@ -52,6 +49,5 @@ module.exports = {
       }
     });
   },
-
 
 };
